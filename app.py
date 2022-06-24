@@ -19,8 +19,6 @@ class contactsearch(db.Model):
     def __repr__(self) -> str:
         return f"{self.person_name} - {self.person_second_name}"
 
-
-
 @app.route('/' ,methods=['GET', 'POST'])
 def indexx():
     if(request.method=='POST'):
