@@ -2,6 +2,7 @@ from email.policy import default
 from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 app=Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
 
@@ -58,12 +59,34 @@ def delete(person_sno,person_number):
     return redirect('/')
 
 
-@app.route('/update')
-def update():
-    allcontact= contactsearch.query.all()
-    print(allcontact)
-    return "THIS IS CONTACTS PAGE"
+@app.route('/update/<int:person_sno>/<int:person_number>',methods=['GET', 'POST'])
+def update(person_sno,person_number):
+    if(request.method=="POST"):
+        first_name = request.form['first_name']
+        phone = ((request.form['phone']).replace(" ", ""))
+        phone=int(phone)
+        last_name= request.form['last_name']
+        altphone= (request.form['altphone'])
 
+        if(len(altphone)==0):
+            altphone=0
+        else:
+            altphone=(altphone.replace(" ", ""))
+            altphone=int(altphone)
+        contact=contactsearch(person_name=first_name, person_second_name=last_name,person_number=phone, person_alt_number=altphone)
+        
+        allcontact= contactsearch.query.filter_by(person_sno=person_sno,person_number=person_number).first()
+
+        allcontact.person_name=first_name
+        allcontact.person_second_name=last_name
+        allcontact.person_number=phone
+        allcontact.person_alt_number=altphone
+        db.session.add(allcontact)
+        db.session.commit()
+        return redirect("/")
+
+    allcontact= contactsearch.query.filter_by(person_sno=person_sno,person_number=person_number).first()
+    return render_template('update.html', allcontact=allcontact)
 
 @app.route('/new')
 def fulldetails():
