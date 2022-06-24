@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Records</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link type="text/css" rel="stylesheet" href="static\css\style.css"/>
+</head>
+
+
+<body>
+<form class="btn-outline-danger" action="/" method="POST">
+      <h4 class="details"><b>Details</b></h4>
+  <div class="contentform">
+      <div class="leftcontact">
+          <div class="form-group">
+          <p> First Name <span>*</span></p>
+          <span class="icon-case"><i class="fa fa-user"><img src="https://pic.onlinewebfonts.com/svg/img_189000.png" alt="" width="25px" height="20px"></i></span>
+              <input type="text" name="first_name" id="prenom" data-rule="required" required/>
+              <div class="validation"></div>
+          </div>
+
+          <div class="form-group">
+          <p>Last Name <span>*</span></p>	
+          <span class="icon-case"><i class="fa fa-envelope-o"><img src="data:image/png;base64,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" alt="" width="25px" height="20px"></i></span>
+              <input type="text" name="last_name" id="last_name" required/>
+              <div class="validation"></div>
+          </div>	
+
+
+  </div>
+
+  <div class="rightcontact">	
+
+
+          <div class="form-group">
+          <p>Phone number <span>*</span></p>	
+          <span class="icon-case"><i class="fa fa-phone"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADgCAMAAADCMfHtAAAAilBMVEX39/cAAAD////7+/vw8PDl5eWKiorz8/Pr6+vo6Ojc3NzY2NgSEhL29vZycnLg4OBYWFiioqLDw8MZGRmzs7NLS0vQ0NCUlJSbm5sgICB4eHhgYGB+fn7Hx8c9PT25ubk2Njaurq4wMDB8fHxqamqPj49QUFAoKCg7OztDQ0McHBwrKysUFBRcXFzCA2IqAAAHR0lEQVR4nO2dh3rqSAxGPRKhE8qlJiSEhNTdvP/rLZCywcFYmhnZEtfnAfj8o6kalSSpqKioqKioqPgF7in7K8RAgObNajxqI5ylSITW7M59cNU5P42Ao4H7weDMNAIOFy7FdR/K/qxoIKz/pPXtmJ2LGaHzekzflteLczAjYj1D346RfYnQvzsh0LmhdYkwPqlvS920RMRlnsDt3mhYItYm+QItS4ROlyLQuaVRiflT8JuZSYlwapNIM7YnEZNrhkDnptZON1jLOsZkUbMlEZv/MAW6ialxis2jB+3TPBqSiE3iLnHIjZlxirU3H4HONYxIxN7po3Y210bGKQzytWSwNiERHrwFOndhYJzCOkCghS0DOyECTdyHPTbCA7SPU7gMFOiedBsRR6ECta+nDa+zTArNR3DWjTCTS71GxH4Mgc511BoReHfeTG61GhGncQQ6t1JqxFgmdK6rU2GsWbhjrnKcxllIP6mVreYYGFGgyreMGMeZH7T0TcXwE+kBCv38GHqpSKHujoHtuALdgzYj4jqyQnUzEQgvoTy0zcQAB1sWjbI1HQK+PtJslO2J6OnmPoWuiYj/xleo6x1DQqGuyz7+issL502VDYH75EuhWbaqn8BGQqEmI8JcQKGqHRFv4gtU9kxTi69wrGmQSiw1d7pMGNdNs0fb5SL6RGwrExjZE+VetFkwieyouUr0CYzpbHueKltkPok2TIdaszAiOTLqDZ0GTCK9PT211erbAuyIyzS3I60D9AMYhukbKNe3C7oM0Vfva9eXhGyJk7GNrFLfkK8rC+b7AEgpMilmNTP6vM41c73b31GQuWF0VW9/x+BGlyq8QeSBrMg2c4kyCXPX1/aARoNzw1DlDyXDMOLGpAm3kBVqDV/Lg25EdeEWVKjPUN2yP9QbanLsvdVpuDUi7U1fm0+bAfF0urA6DRPyFUNliCUN4j1RVyQCD9plX1ckAg+kvSYavFl8AzOKQmVRTzzwmSJRcwJQHrQdw+b16RN4p0i0PBPxgqLQ7AVqBy3CxqIf4xuS3+3FtELSa5uB1OZs4Ioi0ew9eEeDonBg2oikTVF3anMOtJREy+OUdgJ/MW1Eks/G9AmcNk4tF8D8G26KK4pC00eb8/doJD1S7qXl0xsxGszyagOPJIn6goLp0KLcuzYfTPdgi2TE+55dibQtwz3ZVUi8Kpp22+A9SaK6HHU61Monhg/hxKlotGbyHmqgu87aNCSQGJpp9/xGDpI2LJGarhBZIiIAFNOfiBxMFFMiQn/9uKwPp1jE0CCHusdbbmD1tRN3h0VoJGeaRip9jb0DP1EBGul1sONs/b2X1M8OxecjPWEhRtOLI56+O/HMP5qnf8cm+O8+npv8IJ0dQK9NMAiUmJmaLJ1fRbxJbbkNjNXInPPXTVkz0isu/QlpeHXyILwWNSMm9JJL/utCzpo2Ee0WhjV6+Trv10W8zfll0XRjTiXQut+HELJ3JpK9+4CRxzfwcsGRXtglZyMwikwsPP5rYpmOgWBkHdWrsWfFlUhP2L2RG6msNLclc/NntKCoy51UWUlgt6zFnRZU98lrS8yMtDDbLzgjlZlyLffsxavac0keTiwT7ngUW1N5Et+oBxx+1vyT2JrKrL30SDKjT2XxbkdqpBJfT794oXyIX3U8seAz3nLj3CzXjL51D5ZSk5Fbre8uz4zw5KfQDaR6hrFLoixPFpEKKDr2LHWjYnTz/KB7yg0RVA1Xyk1F9059Mcj8t+k+kqNIdQsFfgGmx+NDNbQKkNjjHvTZXYYWqyNDNVig3Cs0NmkP/T95aqc0YpTijVKpStjzWOQfaj++BqEfp/6mmESvNWLeANyeAXZPhBchbQkPEAuX8KvUuxm3m83WdOhT3igLsVdolmdDFDHfBrQFCp97IRZFSGw3L8+72LUf4zfK8EMwlZ59SpVBsnMvdDRMRtHOaNiI3/CEj2hRf+Re/CUQTnLhPGvYVKhg2xCvvFL2SC2ifQhMBbrzkCkkeRcbEm1BiBQTq4wl7v5FNbSFlkT/GgLFFSJDkfYu+RQZpwz9dHxhEfSKE1jOvlF0qDm086J/IlN8KTnEYmfjqIQUM+gXeIorJ8EMuUWYAyirQBc0CzrilFcLEOGGVCMtkFJzyxDlN46y6+VAi1QlzZ9F6cnICCPRoaqhWA5i+CNhJkr6MEEt2jNTCjWFHRDaIg5HdhyrINudI/5ZVZPAZO8AiOzHUTNEv4m85ChZZA6BiHcOydSEEKAXR2NoipUkUIugcaOx3+L/QGPIjjc6RH+VA0jWIUc5fYvoEQBWvp7VV+FkxGggTEn1/dLMLHUMgyY7ru1eLIJdBoRkxfJYzYspJhGV7aG8Tl1ZN6J5pHJsDTmi+KwmU0MzMA1CbZyz7Lxb1rcHobHKDOfsmmgJmg8CdOabX5Pyrn4DZ6Fvz1YkXqxml5P7Rbe7uJ9czkbNM5L3yXeJoQJrDVVUVFRUVFRUVFRUVKT4D7+yadtYP1w6AAAAAElFTkSuQmCC" alt="" width="25px" height="20px"></i></span>
+              <input type="text" name="phone" id="phone" data-rule="maxlen:10" required/>
+              <div class="validation"></div>
+          </div>
+
+          <div class="form-group">
+          <p>Alternate Number</p>
+          <span class="icon-case"><i class="fa fa-info"></i><img src="data:image/png;base64,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" alt="" width="25px" height="20px"></i></span>
+          <input type="text" name="altphone" id="altphone" data-rule="maxlen:10"/>
+              <div class="validation"></div>
+          </div>
+  </div>
+  </div>
+  <!-- <button type="button" class="btn btn-dark bouton-contact">Submit</button> -->
+  <!-- <a href="" type="button" class="btn btn-dark bouton-contact btn-sm mx-2">Add Contact</a>
+   -->
+   <button class="btn btn-dark bouton-contact" type="submit">Save</button>
+</form>	
+</body>
+</html>

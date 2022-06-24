@@ -1,0 +1,114 @@
+    <!doctype html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Harsh's PhoneBook</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    </head>
+
+<body>
+    <!-- <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav> -->
+
+    {% for message in get_flashed_messages() %}
+	
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	  {{ message }}
+	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+
+	
+{% endfor %}
+
+
+    <div>
+
+        <!-- <img src="https://www.freepik.com/free-vector/black-realistic-retro-dial-phone-wired-landline-isolated-with-shadows_9378284.htm#query=phone%20book&position=25&from_view=search"
+            alt="PhoneBook Logo" style="display:block;" height="100px" width="100px"> -->
+        <a href="/">
+            <h1 style="text-align: center;">PhoneBook App</h1>
+    </div></a>
+
+
+
+    <div class="container">
+        <form action="/" method="POST">
+            <div class="form-group">
+                <label for="contact_search"><h3>Contacts <span style="text-align:right">
+                    <!-- <button class="btn btn-outline-success" type="submit">Add contact</button> -->
+                    <a href="/new" type="button"
+                            class="btn btn-outline-dark btn-sm mx-2">Add Contact</a>
+                </span></h3></label>
+                <input type="text" class="form-control" id="contact_search" aria-describedby="emailHelp"
+                    placeholder="Enter contact name to be searched" name="contact_search">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin: 10px;">Search</button>
+        </form>
+    </div>
+
+
+    <div class="container my-3">
+        <u>
+            <h2 style="text-align:center;">Records</h2>
+        </u>
+        {% if allcontact|length ==0 %}
+        <h5 style="text-align:center;">No Records</h5>
+        {% else %}
+        <table class="table table-borderless table-dark table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" style="display:none;">SNo</th>
+                        <th scope="col">Name</th>
+                        <!-- <th scope="col">Last Name</th> -->
+                        <th scope="col">Number</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+        {% for contact in allcontact %}
+                <tr>
+                    <th scope="row" style="display:none;">{{loop.index}}</th>
+                    <td>{{contact.person_name}} {{contact.person_second_name}} </td>
+                    <td>{{contact.person_number}}</td>
+                    <td> <a href="/delete/{{contact.person_sno}}/{{contact.person_number}}" type="button"
+                            class="btn btn-outline-danger btn-sm mx-2">Delete</a></td>
+                </tr>
+        {% endfor %}
+    </tbody>
+</table>
+        {% endif %}
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
