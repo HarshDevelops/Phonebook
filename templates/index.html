@@ -6,56 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Harsh's PhoneBook</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="icon" href="./static/contactbook.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&family=Poppins:wght@200&display=swap" rel="stylesheet">
+
+        <style>
+            .form-control:valid {
+  background-color: #CDC7E5;
+}
+::placeholder {
+  color: red;
+  opacity: 1; 
+}
+
+:-ms-input-placeholder { 
+ color: red;
+}
+
+::-ms-input-placeholder { 
+ color: red;
+}
+        </style>
+
+
 </head>
 
-<body>
-    <!-- <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav> -->
+<body style="background-color:#4E4D5C;font-family: 'Montserrat', sans-serif;
+font-family: 'Poppins', sans-serif; ">
 
     {% for message in get_flashed_messages() %}
+    {% if 'Successfully' in message %}
 
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% else %}
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-
+    {% endif %}
     {% endfor %}
 
 
     <div>
-
-        <!-- <img src="https://www.freepik.com/free-vector/black-realistic-retro-dial-phone-wired-landline-isolated-with-shadows_9378284.htm#query=phone%20book&position=25&from_view=search"
-            alt="PhoneBook Logo" style="display:block;" height="100px" width="100px"> -->
-        <a href="/">
-            <h1 style="text-align: center;">PhoneBook App</h1>
-    </div></a>
+        
+           <u> <h1 style="text-align: center;color: #6BA292;"> <b>Phone Book App</b></h1></u>
+    </div>
 
 
 
@@ -63,32 +65,30 @@
         <form action="/" method="POST">
             <div class="form-group">
                 <label for="contact_search">
-                    <h3>Contacts <span style="text-align:right">
-                            <!-- <button class="btn btn-outline-success" type="submit">Add contact</button> -->
-                            <a href="/new" type="button" class="btn btn-outline-dark btn-sm mx-2">Add Contact</a>
+                    <h3 style="color: #6BA292;"><b>Contacts</b><span style="text-align:right">
+                            <a href="/new" type="button" class="btn btn-outline-info btn-sm mx-2">Add Contact</a>
                         </span></h3>
                 </label>
                 <input type="text" class="form-control" id="contact_search" aria-describedby="emailHelp"
-                    placeholder="Enter contact name to be searched" name="contact_search">
+                    placeholder="Enter contact name to be searched" name="contact_search" onkeyup="myfunc()">
             </div>
-            <button type="submit" class="btn btn-primary" style="margin: 10px;">Search</button>
+
         </form>
     </div>
 
 
     <div class="container my-3">
         <u>
-            <h2 style="text-align:center;">Records</h2>
+            <h2 style="text-align:center;color: #6BA292;"><b>Records</b></h2>
         </u>
         {% if allcontact|length ==0 %}
-        <h5 style="text-align:center;">No Records</h5>
+        <h5 style="text-align:center;color: #6BA292;">No Records</h5>
         {% else %}
-        <table class="table table-borderless table-dark table-hover">
+        <table class="table table-borderless table-dark table-hover" id="ctable">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col" style="display:none;">SNo</th>
                     <th scope="col">Name</th>
-                    <!-- <th scope="col">Last Name</th> -->
                     <th scope="col">Number</th>
                     <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action</th>
                 </tr>
@@ -101,39 +101,53 @@
                     <td>{{contact.person_number}}</td>
                     <td> <a href="/delete/{{contact.person_sno}}/{{contact.person_number}}" type="button"
                             class="btn btn-outline-danger btn-sm mx-2">Delete</a>
-                            <a href="/update/{{contact.person_sno}}/{{contact.person_number}}" type="button"
-                            class="btn btn-outline-success btn-sm mx-2">Update</a></td>
-                    <!-- <td>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-success dropdown-toggle" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown"
-                                aria-expanded="false">
-                                ...
-                            </button> -->
-                            <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item "
-                                    href="/delete/{{contact.person_sno}}/{{contact.person_number}}"> <button
-                                        type="button" class="btn btn-outline-danger"> Delete </button></a>
-                                <a class="dropdown-item" href="#"><button type="button" class="btn btn-outline-info">
-                                        Update </button></a>
+                        <a href="/update/{{contact.person_sno}}/{{contact.person_number}}" type="button"
+                            class="btn btn-outline-success btn-sm mx-2">Update</a>
+                        <a href="/search/{{contact.person_name}}/{{contact.person_second_name}}" type="button"
+                            class="btn btn-outline-success btn-sm mx-2" style="visibility:hidden;"
+                            id="search2">Search</a>
+                    </td>
+    </div>
+    </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% endif %}
 
-                            </div> -->
+    </div>
 
-
-                        </div>
-                    </td> 
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-
+    <div>
+        <h5 id="norecorddiv" style="text-align:center; visibility: hidden;color: #6BA292;"><b>No Records</b></h5>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
+
+    <script>
+        function myfunc() {
+            var contact_search, table, tr, td, i, val;
+            contact_search = document.getElementById("contact_search");
+            filter = contact_search.value.toUpperCase();
+            table = document.getElementById("ctable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    val = td.textContent || td.innerText;
+                    if (val.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        document.getElementById
+                        tr[i].style.display = "none";
+                        document.getElementById("norecorddiv").style.visibility = "visible";
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
