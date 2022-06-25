@@ -1,6 +1,8 @@
 body {
     margin: auto; 
-    font-family: 'Open Sans', sans-serif;
+    background-color:#4E4D5C;
+    font-family: 'Montserrat', sans-serif;
+font-family: 'Poppins', sans-serif;
   }
   
   .info p {

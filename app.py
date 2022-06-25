@@ -44,11 +44,26 @@ def indexx():
     return render_template('index.html', allcontact=allcontact)
 
 
-@app.route('/contacts')
+@app.route('/search/elo',methods=['GET', 'POST'])
 def index():
-    allcontact= contactsearch.query.all()
-    print(allcontact)
-    return "THIS IS CONTACTS PAGE"
+    if(request.method=='POST'):
+         print("INSIDE POST")
+         to_be_found = request.form['contact_search']
+         print("tbf: ", to_be_found)
+         flag=0
+         if(contactsearch.query.filter_by(person_name=to_be_found).all()!=0):
+            flag=1
+         elif(contactsearch.query.filter_by(person_second_name=to_be_found).all()!=0):
+            flag=2
+         else:
+            flag=3
+
+         if(flag==3):
+            allcontact=contactsearch.query.filter_by(person_name=to_be_found).first()
+    # allcontact= contactsearch.query.filter_by(person_second_name=to_be_found).all()
+    
+    return redirect('/')
+
 
 
 @app.route('/delete/<int:person_sno>/<int:person_number>')
@@ -67,22 +82,27 @@ def update(person_sno,person_number):
         phone=int(phone)
         last_name= request.form['last_name']
         altphone= (request.form['altphone'])
-
-        if(len(altphone)==0):
+        print(altphone)
+        print(len(altphone))
+        if(len(altphone)==0 or altphone==" "):
+            print("got it")
             altphone=0
         else:
+            print("got else")
             altphone=(altphone.replace(" ", ""))
             altphone=int(altphone)
-        contact=contactsearch(person_name=first_name, person_second_name=last_name,person_number=phone, person_alt_number=altphone)
+
+        contact=contactsearch(person_name=first_name, person_second_name=last_name,person_number=phone, person_alt_number=int(altphone))
         
         allcontact= contactsearch.query.filter_by(person_sno=person_sno,person_number=person_number).first()
-
+        
         allcontact.person_name=first_name
         allcontact.person_second_name=last_name
         allcontact.person_number=phone
-        allcontact.person_alt_number=altphone
+        allcontact.person_alt_number=int(altphone)
         db.session.add(allcontact)
         db.session.commit()
+        flash("Contact Successfully Updated!")
         return redirect("/")
 
     allcontact= contactsearch.query.filter_by(person_sno=person_sno,person_number=person_number).first()
