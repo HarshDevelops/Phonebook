@@ -10,7 +10,6 @@ Website: https://harsh-phonebook.herokuapp.com/
 
 ## Demo
 
-Insert gif or link to demo
 
 ![Alt Text](https://github.com/HarshDevelops/Phonebook/blob/main/static/Animation.gif)
 ## Run Locally
