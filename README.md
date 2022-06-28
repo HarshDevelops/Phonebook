@@ -12,7 +12,7 @@ Website: https://harsh-phonebook.herokuapp.com/
 
 Insert gif or link to demo
 
-![Alt Text](https://i.ibb.co/VpHMjff/Animation.gif)
+![Alt Text](https://github.com/HarshDevelops/Phonebook/blob/main/static/Animation.gif)
 ## Run Locally
 
 Clone the project
