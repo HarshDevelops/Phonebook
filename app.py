@@ -20,6 +20,7 @@ class contactsearch(db.Model):
     def __repr__(self) -> str:
         return f"{self.person_name} - {self.person_second_name}"
 
+#This section is to enter new contact details
 @app.route('/' ,methods=['GET', 'POST'])
 def indexx():
     if(request.method=='POST'):
@@ -32,11 +33,6 @@ def indexx():
             phone=int(phone)
         last_name= request.form['last_name']
         email= (request.form['email'])
-        # if(len(altphone)==0):
-        #     altphone=0
-        # else:
-        #     altphone=(altphone.replace(" ", ""))
-        #     altphone=int(altphone)
         contact=contactsearch(person_name=first_name, person_second_name=last_name,person_number=phone, person_email=email)
         db.session.add(contact)
         db.session.commit()
@@ -44,7 +40,7 @@ def indexx():
     return render_template('index.html', allcontact=allcontact)
 
 
-
+#Section to delete contact
 @app.route('/delete/<int:person_sno>/<int:person_number>')
 def delete(person_sno,person_number):
     allcontact= contactsearch.query.filter_by(person_sno=person_sno,person_number=person_number).first()
@@ -52,7 +48,7 @@ def delete(person_sno,person_number):
     db.session.commit()
     return redirect('/')
 
-
+#Section to update a contact
 @app.route('/update/<int:person_sno>/<int:person_number>',methods=['GET', 'POST'])
 def update(person_sno,person_number):
     if(request.method=="POST"):
